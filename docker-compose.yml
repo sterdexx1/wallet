@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  service:
+    build: src
+    container_name: src
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/wallet
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=bestuser
+
+
+  db:
+    image: postgres:14-alpine
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=wallet
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=bestuser

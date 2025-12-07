@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "e838ea41-9a51-4017-bcb3-9aecfe394905",
+		"name": "WalletTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50515245",
+		"_collection_link": "https://sterdexx1-9535838.postman.co/workspace/%D0%98%D0%B2%D0%B0%D0%BD-%D0%A2%D0%B8%D0%BC%D0%BE%D1%84%D0%B5%D0%B5%D0%B2's-Workspace~445aa06d-3096-40a4-8a91-e885048a0a3c/collection/50515245-e838ea41-9a51-4017-bcb3-9aecfe394905?action=share&source=collection_link&creator=50515245"
+	},
+	"item": [
+		{
+			"name": "WalletGet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200 and JSON-format\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"  pm.response.to.be.withBody;\r",
+							"  pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Response time is under 1000 ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"let parsed;\r",
+							"pm.test(\"Response body is valid JSON\", function () {\r",
+							"  try {\r",
+							"    parsed = pm.response.json();\r",
+							"    pm.expect(parsed).to.exist;\r",
+							"  } catch (e) {\r",
+							"    pm.expect.fail(\"Body is not valid JSON: \" + e.message);\r",
+							"  }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/wallets/111a1111-a11a-11a1-a111-111111111111",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"wallets",
+						"111a1111-a11a-11a1-a111-111111111111"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WalletDeposit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200 and JSON\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The id field is present\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The amount field is present\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.amount).to.exist;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"packages": {},
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"111a1111-a11a-11a1-a111-111111111111\",\r\n    \"operationType\": \"DEPOSIT\",\r\n    \"amount\": \"10000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"wallets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WalletWithdraw",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200 and JSON\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The id field is present\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.id).to.exist;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"The amount field is present\", function () {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.amount).to.exist;\r",
+							"});\r",
+							"let parsed;\r",
+							"pm.test(\"Response body is valid JSON\", function () {\r",
+							"  try {\r",
+							"    parsed = pm.response.json();\r",
+							"    pm.expect(parsed).to.exist;\r",
+							"  } catch (e) {\r",
+							"    pm.expect.fail(\"Body is not valid JSON: \" + e.message);\r",
+							"  }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"111a1111-a11a-11a1-a111-111111111111\",\r\n    \"operationType\": \"WITHDRAW\",\r\n    \"amount\": \"10000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"wallets"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

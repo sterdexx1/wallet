@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-wallet
+      author: Ivan
+      changes:
+        - insert:
+            tableName: wallet
+            columns:
+              - column:
+                  name: id
+                  value: '111a1111-a11a-11a1-a111-111111111111'
+              - column:
+                  name: amount
+                  value: '1000'
+        - insert:
+            tableName: wallet
+            columns:
+              - column:
+                  name: id
+                  value: '222a2222-a22a-22a2-a222-222222222222'
+              - column:
+                  name: amount
+                  value: '1000'
